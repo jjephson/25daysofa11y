@@ -1,33 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Accessibility quotes for each day
+// Accessibility quotes for each day with descriptive words
 const accessibilityQuotes = [
-  "Accessibility is not a feature, it's a fundamental right.",
-  "The web was designed to work for all people, regardless of their hardware, software, language, culture, location, or physical or mental ability.",
-  "When we design for accessibility, we design for everyone.",
-  "Inclusive design creates better experiences for all users.",
-  "Accessibility is not about disability, it's about human rights.",
-  "Every user deserves equal access to information and functionality.",
-  "Accessibility drives innovation and improves usability for everyone.",
-  "Digital accessibility is not optional - it's essential.",
-  "Building accessible products makes business sense.",
-  "Accessibility is about removing barriers, not adding them.",
-  "Inclusive design leads to better products and happier users.",
-  "Accessibility compliance is just the minimum - aim higher.",
-  "Every accessibility improvement benefits all users.",
-  "Accessibility is about empathy and understanding.",
-  "Inclusive design is good design.",
-  "Accessibility should be built in, not bolted on.",
-  "The cost of accessibility is far less than the cost of exclusion.",
-  "Accessibility is not a checklist, it's a mindset.",
-  "Inclusive design creates competitive advantages.",
-  "Accessibility is about creating equal opportunities.",
-  "Every user has unique needs - accessibility addresses them all.",
-  "Accessibility improves SEO and user experience.",
-  "Inclusive design is the future of digital products.",
-  "Accessibility is about dignity and respect.",
-  "The best products work for everyone, everywhere."
+  { word: "Fundamental", quote: "Accessibility is not a feature, it's a fundamental right." },
+  { word: "Universal", quote: "The web was designed to work for all people, regardless of their hardware, software, language, culture, location, or physical or mental ability." },
+  { word: "Inclusive", quote: "When we design for accessibility, we design for everyone." },
+  { word: "Purposeful", quote: "Inclusive design creates better experiences for all users." },
+  { word: "Essential", quote: "Accessibility is not about disability, it's about human rights." },
+  { word: "Equal", quote: "Every user deserves equal access to information and functionality." },
+  { word: "Innovative", quote: "Accessibility drives innovation and improves usability for everyone." },
+  { word: "Required", quote: "Digital accessibility is not optional - it's essential." },
+  { word: "Wise", quote: "Building accessible products makes business sense." },
+  { word: "Removing", quote: "Accessibility is about removing barriers, not adding them." },
+  { word: "Better", quote: "Inclusive design leads to better products and happier users." },
+  { word: "Excellence", quote: "Accessibility compliance is just the minimum - aim higher." },
+  { word: "Beneficial", quote: "Every accessibility improvement benefits all users." },
+  { word: "Empathetic", quote: "Accessibility is about empathy and understanding." },
+  { word: "Good", quote: "Inclusive design is good design." },
+  { word: "Built-in", quote: "Accessibility should be built in, not bolted on." },
+  { word: "Cost-effective", quote: "The cost of accessibility is far less than the cost of exclusion." },
+  { word: "Mindful", quote: "Accessibility is not a checklist, it's a mindset." },
+  { word: "Competitive", quote: "Inclusive design creates competitive advantages." },
+  { word: "Opportunity", quote: "Accessibility is about creating equal opportunities." },
+  { word: "Unique", quote: "Every user has unique needs - accessibility addresses them all." },
+  { word: "Optimized", quote: "Accessibility improves SEO and user experience." },
+  { word: "Future", quote: "Inclusive design is the future of digital products." },
+  { word: "Dignified", quote: "Accessibility is about dignity and respect." },
+  { word: "Perfect", quote: "The best products work for everyone, everywhere." }
 ];
 
 // For testing purposes, all days are currently unlocked
@@ -57,31 +57,50 @@ const isDayUnlocked = (day: number) => {
   <section class="advent-calendar" aria-labelledby="calendar-heading">
     <h2 id="calendar-heading">Accessibility Advent Calendar</h2>
     <div class="calendar-grid" role="grid" aria-label="25 days of accessibility quotes">
-      {accessibilityQuotes.map((quote, index) => {
+      {accessibilityQuotes.map((item, index) => {
         const dayNumber = index + 1;
         const isUnlocked = isDayUnlocked(dayNumber);
-        const quotePreview = quote.length > 50 ? quote.substring(0, 50) + '...' : quote;
+        const quotePreview = item.quote.length > 50 ? item.quote.substring(0, 50) + '...' : item.quote;
+        const cardColor = ['red', 'green', 'yellow', 'blue'][index % 4];
         
         return (
           <div 
-            class={`calendar-day ${isUnlocked ? 'unlocked' : 'locked'}`}
+            class={`calendar-day diamond-card ${cardColor} ${isUnlocked ? 'unlocked' : 'locked'}`}
             role="gridcell"
             tabindex={isUnlocked ? 0 : -1}
             aria-label={`Day ${dayNumber}: ${isUnlocked ? quotePreview : 'Locked'}`}
           >
-            <div class="day-number">{dayNumber}</div>
-            <div class="day-content">
-              {isUnlocked ? (
-                <a href={`/day-${dayNumber}`} class="day-link" aria-label={`Read accessibility quote for day ${dayNumber}`}>
-                  <p class="quote-preview">{quotePreview}</p>
-                  <span class="read-more">Read More →</span>
-                </a>
-              ) : (
-                <div class="locked-content">
-                  <p class="locked-text">🔒</p>
-                  <p class="locked-date">Dec {dayNumber}</p>
+            <div class="card-border">
+              <div class="card-content">
+                <div class="descriptive-word">{item.word}</div>
+                <div class="large-number">
+                  <span class="number-text">{dayNumber.toString().padStart(2, '0')}</span>
+                  <div class="number-pattern"></div>
                 </div>
-              )}
+                <div class="sub-phrase">When Accessibility Matters</div>
+                {isUnlocked && (
+                  <a href={`/day-${dayNumber}`} class="day-link" aria-label={`Read accessibility quote for day ${dayNumber}`}>
+                    <div class="quote-preview">{quotePreview}</div>
+                    <span class="read-more">Read More →</span>
+                  </a>
+                )}
+                {!isUnlocked && (
+                  <div class="locked-content">
+                    <div class="locked-text">🔒</div>
+                    <div class="locked-date">Dec {dayNumber}</div>
+                  </div>
+                )}
+              </div>
+              <div class="decorative-elements">
+                <div class="corner-flourish top-left"></div>
+                <div class="corner-flourish top-right"></div>
+                <div class="corner-flourish bottom-left"></div>
+                <div class="corner-flourish bottom-right"></div>
+                <div class="side-dots left"></div>
+                <div class="side-dots right"></div>
+                <div class="side-dots top"></div>
+                <div class="side-dots bottom"></div>
+              </div>
             </div>
           </div>
         );
@@ -223,163 +242,379 @@ const isDayUnlocked = (day: number) => {
   
   .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
     margin-top: 2rem;
+    padding: 2rem;
   }
   
-  .calendar-day {
-    background: linear-gradient(145deg, #fefefe 0%, #f0f8f0 100%);
-    border: 1px solid transparent;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    text-align: center;
+  .diamond-card {
+    width: 200px;
+    height: 200px;
     position: relative;
+    margin: 2rem auto;
     transition: all 0.3s ease;
-    min-height: 200px;
+  }
+  
+  .diamond-card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+  }
+  
+  .diamond-card:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+  }
+  
+  .card-border {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 3px solid;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Color schemes for each card type */
+  .diamond-card.red .card-border {
+    background: #dc2626;
+    border-color: #b91c1c;
+  }
+  
+  .diamond-card.green .card-border {
+    background: #16a34a;
+    border-color: #15803d;
+  }
+  
+  .diamond-card.yellow .card-border {
+    background: #eab308;
+    border-color: #ca8a04;
+  }
+  
+  .diamond-card.blue .card-border {
+    background: #0ea5e9;
+    border-color: #0284c7;
+  }
+  
+  .card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 140px;
+    height: 140px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background-clip: padding-box;
+    justify-content: center;
+    align-items: center;
   }
   
-  .calendar-day::before {
-    content: '';
+  .descriptive-word {
+    font-family: 'Times New Roman', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  
+  .diamond-card.red .descriptive-word {
+    color: #7f1d1d;
+  }
+  
+  .diamond-card.green .descriptive-word {
+    color: #14532d;
+  }
+  
+  .diamond-card.yellow .descriptive-word {
+    color: #713f12;
+  }
+  
+  .diamond-card.blue .descriptive-word {
+    color: #0c4a6e;
+  }
+  
+  .large-number {
+    position: relative;
+    margin: 8px 0;
+  }
+  
+  .number-text {
+    font-family: 'Times New Roman', serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 0px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .diamond-card.red .number-text {
+    text-shadow: 2px 2px 0px #7f1d1d;
+  }
+  
+  .diamond-card.green .number-text {
+    text-shadow: 2px 2px 0px #14532d;
+  }
+  
+  .diamond-card.yellow .number-text {
+    text-shadow: 2px 2px 0px #713f12;
+  }
+  
+  .diamond-card.blue .number-text {
+    text-shadow: 2px 2px 0px #0c4a6e;
+  }
+  
+  .number-pattern {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 1rem;
-    padding: 1px;
-    background: linear-gradient(135deg, #28a745, #20c997, #17a2b8, #6f42c1);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    z-index: -1;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.1) 2px,
+      rgba(0,0,0,0.1) 4px
+    );
+    z-index: 1;
   }
   
-  @media (prefers-color-scheme: dark) {
-    .calendar-day {
-      background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
-    }
-    
-    .calendar-day::before {
-      background: linear-gradient(135deg, #4caf50, #26c6da, #42a5f5, #ab47bc);
-    }
+  .sub-phrase {
+    font-family: 'Times New Roman', serif;
+    font-size: 8px;
+    font-weight: 400;
+    margin-top: 8px;
+    line-height: 1.2;
   }
   
-  .calendar-day:hover {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  .diamond-card.red .sub-phrase {
+    color: #7f1d1d;
   }
   
-  @media (prefers-color-scheme: dark) {
-    .calendar-day:hover {
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
+  .diamond-card.green .sub-phrase {
+    color: #14532d;
   }
   
-  .calendar-day:focus {
-    outline: 3px solid #007bff;
-    outline-offset: 2px;
+  .diamond-card.yellow .sub-phrase {
+    color: #713f12;
   }
   
-  .calendar-day.locked {
-    background: linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 100%);
-    border-color: #6c757d;
-    opacity: 0.7;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .calendar-day.locked {
-      background: linear-gradient(145deg, #1a1a1a 0%, #0d1117 100%);
-      border-color: #495057;
-    }
-  }
-  
-  .day-number {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(145deg, #dc3545, #c41e3a);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-  
-  .day-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .diamond-card.blue .sub-phrase {
+    color: #0c4a6e;
   }
   
   .day-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .diamond-card:hover .day-link {
+    opacity: 1;
   }
   
   .quote-preview {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin-bottom: 1rem;
-    color: #2c3e50;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .quote-preview {
-      color: #e9ecef;
-    }
+    font-size: 10px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: #333;
+    text-align: center;
+    padding: 0 8px;
   }
   
   .read-more {
     color: #007bff;
     font-weight: 600;
-    font-size: 0.9rem;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .read-more {
-      color: #66b3ff;
-    }
+    font-size: 8px;
   }
   
   .locked-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
   }
   
   .locked-text {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 24px;
+    margin-bottom: 4px;
   }
   
   .locked-date {
-    color: #6c757d;
+    font-size: 8px;
     font-weight: 600;
+    color: white;
   }
   
-  @media (prefers-color-scheme: dark) {
-    .locked-date {
-      color: #adb5bd;
-    }
+  .decorative-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+  
+  .corner-flourish {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+  
+  .corner-flourish::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+  }
+  
+  .corner-flourish.top-left {
+    top: 8px;
+    left: 8px;
+  }
+  
+  .corner-flourish.top-right {
+    top: 8px;
+    right: 8px;
+  }
+  
+  .corner-flourish.bottom-left {
+    bottom: 8px;
+    left: 8px;
+  }
+  
+  .corner-flourish.bottom-right {
+    bottom: 8px;
+    right: 8px;
+  }
+  
+  .diamond-card.red .corner-flourish {
+    color: #7f1d1d;
+  }
+  
+  .diamond-card.green .corner-flourish {
+    color: #14532d;
+  }
+  
+  .diamond-card.yellow .corner-flourish {
+    color: #713f12;
+  }
+  
+  .diamond-card.blue .corner-flourish {
+    color: #0c4a6e;
+  }
+  
+  .side-dots {
+    position: absolute;
+  }
+  
+  .side-dots::before,
+  .side-dots::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: currentColor;
+    border-radius: 50%;
+  }
+  
+  .side-dots.left {
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .side-dots.left::before {
+    top: -8px;
+  }
+  
+  .side-dots.left::after {
+    top: 8px;
+  }
+  
+  .side-dots.right {
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .side-dots.right::before {
+    top: -8px;
+  }
+  
+  .side-dots.right::after {
+    top: 8px;
+  }
+  
+  .side-dots.top {
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .side-dots.top::before {
+    left: -8px;
+  }
+  
+  .side-dots.top::after {
+    left: 8px;
+  }
+  
+  .side-dots.bottom {
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .side-dots.bottom::before {
+    left: -8px;
+  }
+  
+  .side-dots.bottom::after {
+    left: 8px;
+  }
+  
+  .diamond-card.red .side-dots {
+    color: #7f1d1d;
+  }
+  
+  .diamond-card.green .side-dots {
+    color: #14532d;
+  }
+  
+  .diamond-card.yellow .side-dots {
+    color: #713f12;
+  }
+  
+  .diamond-card.blue .side-dots {
+    color: #0c4a6e;
   }
   
   .footer-info {
