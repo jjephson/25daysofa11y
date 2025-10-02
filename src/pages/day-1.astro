@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Day 1: Semantic HTML - 25 Days of A11y">
+  <h1>Day 1: Semantic HTML</h1>
+  
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li>Day 1</li>
+    </ol>
+  </nav>
+  
+  <article>
+    <header>
+      <h2>Why Semantic HTML Matters</h2>
+      <p><time datetime="2024-01-01">January 1, 2024</time></p>
+    </header>
+    
+    <section>
+      <h3>What is Semantic HTML?</h3>
+      <p>
+        Semantic HTML uses elements that clearly describe their meaning in a human- 
+        and machine-readable way. Instead of using generic <code>&lt;div&gt;</code> 
+        elements everywhere, we use specific elements like <code>&lt;header&gt;</code>, 
+        <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;article&gt;</code>.
+      </p>
+    </section>
+    
+    <section>
+      <h3>Benefits for Accessibility</h3>
+      <ul>
+        <li>Screen readers can navigate content more effectively</li>
+        <li>Users can skip to main content or navigation</li>
+        <li>Content structure is clearer for all users</li>
+        <li>Search engines better understand your content</li>
+      </ul>
+    </section>
+    
+    <section>
+      <h3>Example: Before vs After</h3>
+      
+      <h4>❌ Non-semantic</h4>
+      <pre><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;
+    &lt;div&gt;Home&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content"&gt;
+  &lt;div class="article"&gt;
+    &lt;div class="title"&gt;My Article&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      
+      <h4>✅ Semantic</h4>
+      <pre><code>&lt;header&gt;
+  &lt;nav&gt;
+    &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h1&gt;My Article&lt;/h1&gt;
+  &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+    </section>
+    
+    <footer>
+      <p><strong>Challenge:</strong> Review your existing HTML and identify places where you can use more semantic elements.</p>
+    </footer>
+  </article>
+  
+  <nav aria-label="Pagination">
+    <a href="/" rel="prev">← Home</a>
+    <a href="/day-2" rel="next">Day 2: Headings →</a>
+  </nav>
+</Layout>
+
+<style>
+  nav[aria-label="Breadcrumb"] ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  nav[aria-label="Breadcrumb"] li::after {
+    content: ">";
+    margin-left: 0.5rem;
+  }
+  
+  nav[aria-label="Breadcrumb"] li:last-child::after {
+    content: "";
+  }
+  
+  article {
+    margin: 2rem 0;
+  }
+  
+  article header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  section {
+    margin: 2rem 0;
+  }
+  
+  pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+    border: 1px solid #dee2e6;
+  }
+  
+  code {
+    background-color: #f8f9fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+  
+  pre code {
+    background: none;
+    padding: 0;
+  }
+  
+  nav[aria-label="Pagination"] {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  nav[aria-label="Pagination"] a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #007bff;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+  }
+  
+  nav[aria-label="Pagination"] a:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  nav[aria-label="Pagination"] a:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+  }
+</style>
