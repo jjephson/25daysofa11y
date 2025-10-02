@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 12;
+const quote = "Accessibility compliance is just the minimum - aim higher.";
+const explanation = "Meeting WCAG guidelines and legal requirements is important, but true accessibility goes beyond compliance to create genuinely inclusive experiences. Aiming higher means creating products that not only meet standards but exceed user expectations.";
+const businessImpact = "Going beyond compliance creates products that stand out in the market and build stronger customer relationships. Companies that exceed accessibility standards often become industry leaders and attract customers who value inclusive design.";
+const actionItems = [
+  "Set accessibility goals that go beyond minimum compliance requirements",
+  "Benchmark your accessibility against industry leaders, not just standards",
+  "Regularly review and improve your accessibility practices",
+  "Share your accessibility innovations with the broader community"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

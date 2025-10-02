@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 22;
+const quote = "Accessibility improves SEO and user experience.";
+const explanation = "Many accessibility best practices, such as semantic HTML, descriptive alt text, and clear navigation, also improve search engine optimization and overall user experience. This creates multiple benefits from a single investment.";
+const businessImpact = "Accessibility improvements that also boost SEO and UX provide multiple returns on investment. Better SEO means more organic traffic, while better UX leads to higher conversion rates and customer satisfaction.";
+const actionItems = [
+  "Audit your site for accessibility improvements that also benefit SEO",
+  "Ensure your accessibility work includes SEO-friendly practices like semantic HTML and descriptive content",
+  "Measure the SEO and UX impact of your accessibility improvements",
+  "Present accessibility as a multi-benefit investment to stakeholders"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

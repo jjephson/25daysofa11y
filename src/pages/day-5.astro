@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 5;
+const quote = "Accessibility is not about disability, it's about human rights.";
+const explanation = "Accessibility is fundamentally about ensuring equal access to information, services, and opportunities. It's about recognizing that everyone deserves to participate fully in society, including the digital society we've created. This human rights perspective shifts the focus from technical compliance to social justice.";
+const businessImpact = "Companies that view accessibility through a human rights lens build stronger stakeholder relationships, attract purpose-driven employees, and create products that align with their customers' values. This approach also helps companies navigate legal requirements more effectively and avoid reputational damage.";
+const actionItems = [
+  "Review your company's diversity, equity, and inclusion policies to include digital accessibility",
+  "Train your team on accessibility as a human rights issue, not just a technical one",
+  "Partner with disability advocacy organizations to understand their perspectives",
+  "Make accessibility a core part of your corporate social responsibility initiatives"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 25;
+const quote = "The best products work for everyone, everywhere.";
+const explanation = "The ultimate goal of accessibility and inclusive design is to create products that work seamlessly for everyone, regardless of their abilities, circumstances, or context. This universal usability is the hallmark of truly great design.";
+const businessImpact = "Products that work for everyone, everywhere, have the broadest market reach, lowest support costs, and highest user satisfaction. This universal approach often leads to market-leading products that define new standards for excellence.";
+const actionItems = [
+  "Set universal usability as your ultimate design goal",
+  "Regularly test your products with diverse users in various contexts",
+  "Celebrate when your products work well for everyone, everywhere",
+  "Share your universal design successes as inspiration for others"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 8;
+const quote = "Digital accessibility is not optional - it's essential.";
+const explanation = "In our digital-first world, access to digital services is often necessary for participation in society. Making these services inaccessible effectively excludes people from essential activities like banking, healthcare, education, and employment.";
+const businessImpact = "Treating accessibility as essential rather than optional helps companies avoid legal risks, reach untapped markets, and build products that work reliably for all users. This essential nature makes accessibility a business imperative, not just a nice-to-have.";
+const actionItems = [
+  "Make accessibility a core requirement in all your product development processes",
+  "Allocate sufficient resources to accessibility work, treating it as essential infrastructure",
+  "Train all team members on why accessibility is essential, not optional",
+  "Set accessibility goals and measure progress like any other business metric"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

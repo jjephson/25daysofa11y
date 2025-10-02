@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 3;
+const quote = "When we design for accessibility, we design for everyone.";
+const explanation = "Accessible design doesn't just benefit people with disabilities - it benefits everyone. Features like clear navigation, readable text, and intuitive interfaces make your product better for all users. Accessibility improvements often lead to innovations that benefit your entire user base.";
+const businessImpact = "Designing for accessibility leads to products that are easier to use, more intuitive, and require less customer support. This universal design approach reduces development costs by avoiding the need for separate accessible versions and increases user satisfaction across all demographics.";
+const actionItems = [
+  "Conduct user testing with diverse groups, including people with disabilities",
+  "Apply universal design principles to all new features and products",
+  "Document how accessibility improvements benefit all users",
+  "Share accessibility wins with your team to build momentum"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 18;
+const quote = "Accessibility is not a checklist, it's a mindset.";
+const explanation = "True accessibility isn't achieved by following a checklist of technical requirements - it comes from adopting an inclusive mindset that considers diverse user needs in every decision. This mindset shift leads to better, more innovative solutions.";
+const businessImpact = "An accessibility mindset leads to products that are naturally inclusive, reducing the need for separate accessibility efforts and creating better overall user experiences. This mindset also drives innovation and helps teams make better decisions.";
+const actionItems = [
+  "Train your team to think inclusively in all their work, not just when checking accessibility requirements",
+  "Include accessibility considerations in all design and development decisions",
+  "Foster a culture where accessibility is everyone's responsibility",
+  "Regularly reflect on how your mindset affects your accessibility work"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

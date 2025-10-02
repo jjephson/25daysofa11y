@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 13;
+const quote = "Every accessibility improvement benefits all users.";
+const explanation = "Accessibility improvements rarely benefit only one group of users. Features like clear navigation, readable text, and intuitive interfaces make your product better for everyone, including users without disabilities.";
+const businessImpact = "This multiplier effect means that accessibility investments provide returns across your entire user base. Every accessibility improvement becomes a general usability improvement, maximizing the value of your development efforts.";
+const actionItems = [
+  "Document how each accessibility improvement benefits different user groups",
+  "Communicate the broad benefits of accessibility work to stakeholders",
+  "Prioritize accessibility improvements that have the widest positive impact",
+  "Measure the overall user experience improvements from accessibility work"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

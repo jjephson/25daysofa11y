@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 21;
+const quote = "Every user has unique needs - accessibility addresses them all.";
+const explanation = "Accessibility isn't just about addressing specific disabilities - it's about recognizing that every user has unique needs, preferences, and circumstances. Good accessibility design accommodates this diversity and creates flexible solutions.";
+const businessImpact = "Addressing diverse user needs leads to products that work better in more situations and for more people. This flexibility often results in products that are more robust, easier to use, and better suited to real-world conditions.";
+const actionItems = [
+  "Research the diverse needs of your user base, not just those with documented disabilities",
+  "Design flexible interfaces that can adapt to different user needs and preferences",
+  "Test your products in various contexts and with diverse user groups",
+  "Create user personas that represent the full spectrum of human diversity"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

@@ -1,0 +1,281 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export interface Props {
+  day: number;
+  quote: string;
+  explanation: string;
+  businessImpact: string;
+  actionItems: string[];
+}
+
+const { day, quote, explanation, businessImpact, actionItems } = Astro.props;
+
+const previousDay = day > 1 ? day - 1 : null;
+const nextDay = day < 25 ? day + 1 : null;
+---
+
+<Layout title={`Day ${day}: ${quote.substring(0, 50)}... - 25 Days of A11y`}>
+  <header class="quote-header">
+    <nav aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>Day {day}</li>
+      </ol>
+    </nav>
+    
+    <div class="day-badge">Day {day}</div>
+    <h1 class="quote-title">"{quote}"</h1>
+  </header>
+  
+  <main class="quote-content">
+    <section class="explanation">
+      <h2>Why This Matters</h2>
+      <p>{explanation}</p>
+    </section>
+    
+    <section class="business-impact">
+      <h2>Business Impact</h2>
+      <p>{businessImpact}</p>
+    </section>
+    
+    <section class="action-items">
+      <h2>What You Can Do Today</h2>
+      <ul>
+        {actionItems.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+    
+    <section class="reflection">
+      <h2>Reflection Question</h2>
+      <p>
+        How does this quote relate to your current digital products or services? 
+        What barriers might exist that you haven't considered before?
+      </p>
+    </section>
+  </main>
+  
+  <nav class="pagination" aria-label="Day navigation">
+    {previousDay && (
+      <a href={`/day-${previousDay}`} class="nav-link prev" rel="prev">
+        ← Day {previousDay}
+      </a>
+    )}
+    
+    <a href="/" class="nav-link home">🏠 Calendar</a>
+    
+    {nextDay && (
+      <a href={`/day-${nextDay}`} class="nav-link next" rel="next">
+        Day {nextDay} →
+      </a>
+    )}
+  </nav>
+</Layout>
+
+<style>
+  .quote-header {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-header {
+      background: linear-gradient(135deg, #1a3d1a 0%, #0f2a3d 100%);
+    }
+  }
+  
+  nav[aria-label="Breadcrumb"] ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  
+  nav[aria-label="Breadcrumb"] li::after {
+    content: ">";
+    margin-left: 0.5rem;
+    color: #666;
+  }
+  
+  nav[aria-label="Breadcrumb"] li:last-child::after {
+    content: "";
+  }
+  
+  nav[aria-label="Breadcrumb"] a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    nav[aria-label="Breadcrumb"] li::after {
+      color: #999;
+    }
+    
+    nav[aria-label="Breadcrumb"] a {
+      color: #66b3ff;
+    }
+  }
+  
+  .day-badge {
+    display: inline-block;
+    background: linear-gradient(145deg, #dc3545, #c41e3a);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .quote-title {
+    font-size: 2rem;
+    line-height: 1.3;
+    color: #2c3e50;
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-title {
+      color: #e9ecef;
+    }
+  }
+  
+  .quote-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .quote-content section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 1rem;
+    border-left: 4px solid #28a745;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-content section {
+      background: #2d2d2d;
+      border-left-color: #4caf50;
+    }
+  }
+  
+  .quote-content h2 {
+    color: #28a745;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-content h2 {
+      color: #4caf50;
+    }
+  }
+  
+  .quote-content p {
+    line-height: 1.6;
+    color: #2c3e50;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-content p {
+      color: #e9ecef;
+    }
+  }
+  
+  .quote-content ul {
+    padding-left: 1.5rem;
+  }
+  
+  .quote-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: #2c3e50;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-content li {
+      color: #e9ecef;
+    }
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .pagination {
+      border-top-color: #495057;
+    }
+  }
+  
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+  }
+  
+  .nav-link:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .nav-link:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+  }
+  
+  .nav-link.home {
+    background: #28a745;
+  }
+  
+  .nav-link.home:hover {
+    background: #1e7e34;
+  }
+  
+  .nav-link.prev {
+    margin-right: auto;
+  }
+  
+  .nav-link.next {
+    margin-left: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .pagination {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .nav-link.prev,
+    .nav-link.next {
+      margin: 0;
+    }
+    
+    .quote-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

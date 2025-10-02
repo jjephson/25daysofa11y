@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 10;
+const quote = "Accessibility is about removing barriers, not adding them.";
+const explanation = "Good accessibility design removes obstacles that prevent people from using your product effectively. It's not about adding complex features or compromising your design - it's about creating clear, intuitive experiences that work for everyone.";
+const businessImpact = "Removing barriers leads to products that are easier to use for everyone, reducing support costs and increasing user satisfaction. This barrier-removal approach often results in cleaner, more intuitive designs that perform better overall.";
+const actionItems = [
+  "Identify and remove unnecessary complexity in your user interfaces",
+  "Simplify navigation and information architecture to reduce cognitive load",
+  "Remove barriers like small click targets, low contrast, or complex forms",
+  "Focus on making your core functionality easily accessible to all users"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

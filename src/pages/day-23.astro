@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 23;
+const quote = "Inclusive design is the future of digital products.";
+const explanation = "As our world becomes increasingly digital and diverse, inclusive design will become the standard for successful products. Companies that embrace inclusive design now will be better positioned for future success.";
+const businessImpact = "Getting ahead of the curve on inclusive design positions companies for long-term success in an increasingly diverse and digital world. Early adopters often become industry leaders and set the standards for others to follow.";
+const actionItems = [
+  "Position your company as a leader in inclusive design within your industry",
+  "Invest in building long-term inclusive design capabilities",
+  "Share your inclusive design knowledge with the broader community",
+  "Plan for a future where inclusive design is the expected standard"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

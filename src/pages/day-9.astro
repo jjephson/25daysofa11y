@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 9;
+const quote = "Building accessible products makes business sense.";
+const explanation = "Accessible products reach more customers, reduce support costs, improve SEO rankings, and help companies comply with legal requirements. The business case for accessibility is compelling when you consider the full range of benefits.";
+const businessImpact = "Companies that invest in accessibility see measurable returns through increased market reach, reduced legal risks, better user experience, and improved brand reputation. The ROI of accessibility often exceeds that of many other business investments.";
+const actionItems = [
+  "Calculate the business case for accessibility in your organization",
+  "Track metrics related to accessibility improvements (user satisfaction, support tickets, market reach)",
+  "Present accessibility as a business investment, not just a compliance cost",
+  "Share accessibility success stories with stakeholders to build support"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

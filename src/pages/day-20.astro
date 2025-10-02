@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 20;
+const quote = "Accessibility is about creating equal opportunities.";
+const explanation = "Digital accessibility ensures that everyone has equal opportunities to participate in our increasingly digital society. This includes access to education, employment, healthcare, government services, and social connections.";
+const businessImpact = "Creating equal opportunities through accessible design helps companies fulfill their social responsibilities while also reaching untapped markets. This approach builds stronger stakeholder relationships and creates positive brand associations.";
+const actionItems = [
+  "Audit your products to identify areas where you can create more equal opportunities",
+  "Partner with organizations that promote equal opportunities for people with disabilities",
+  "Make accessibility part of your corporate social responsibility initiatives",
+  "Share stories about how your accessible products create opportunities for users"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

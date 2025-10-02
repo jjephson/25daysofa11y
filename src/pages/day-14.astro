@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 14;
+const quote = "Accessibility is about empathy and understanding.";
+const explanation = "True accessibility comes from understanding and empathizing with users who face barriers that you might not experience. This empathy drives better design decisions and creates more meaningful solutions.";
+const businessImpact = "Empathy-driven design leads to products that truly meet user needs, resulting in higher satisfaction, stronger brand loyalty, and products that people genuinely want to use. This understanding also helps teams make better decisions throughout the development process.";
+const actionItems = [
+  "Spend time with users who have disabilities to understand their experiences",
+  "Include people with disabilities in your user research and testing",
+  "Train your team on empathy and understanding in design",
+  "Create personas that include diverse abilities and experiences"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

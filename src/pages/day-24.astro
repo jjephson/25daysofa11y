@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 24;
+const quote = "Accessibility is about dignity and respect.";
+const explanation = "Accessible design shows respect for all users and recognizes their dignity as individuals with equal worth. This respect should be reflected in how we design and build digital products that everyone can use.";
+const businessImpact = "Designing with dignity and respect builds stronger customer relationships and creates positive brand associations. This approach also helps attract and retain employees who value inclusive and respectful workplace cultures.";
+const actionItems = [
+  "Review your design and development processes to ensure they reflect dignity and respect for all users",
+  "Train your team on the importance of dignity and respect in accessibility work",
+  "Create products that make users feel valued and included",
+  "Foster a company culture that values dignity and respect for all people"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

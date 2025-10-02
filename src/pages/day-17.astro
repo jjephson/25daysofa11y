@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 17;
+const quote = "The cost of accessibility is far less than the cost of exclusion.";
+const explanation = "While implementing accessibility requires investment, the cost of excluding users through inaccessible design is much higher. This includes lost revenue, legal risks, reputational damage, and the cost of retrofitting inaccessible products.";
+const businessImpact = "Companies that invest in accessibility upfront avoid the much higher costs of exclusion, including lost customers, legal settlements, and expensive retrofits. The ROI of accessibility investment typically exceeds the costs within the first year.";
+const actionItems = [
+  "Calculate the true cost of excluding users through inaccessible design",
+  "Compare the cost of building accessibility in versus retrofitting later",
+  "Document the business risks of accessibility exclusion",
+  "Present accessibility investment as cost avoidance, not just compliance"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

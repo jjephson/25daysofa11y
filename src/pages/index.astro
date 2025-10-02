@@ -1,55 +1,363 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Accessibility quotes for each day
+const accessibilityQuotes = [
+  "Accessibility is not a feature, it's a fundamental right.",
+  "The web was designed to work for all people, regardless of their hardware, software, language, culture, location, or physical or mental ability.",
+  "When we design for accessibility, we design for everyone.",
+  "Inclusive design creates better experiences for all users.",
+  "Accessibility is not about disability, it's about human rights.",
+  "Every user deserves equal access to information and functionality.",
+  "Accessibility drives innovation and improves usability for everyone.",
+  "Digital accessibility is not optional - it's essential.",
+  "Building accessible products makes business sense.",
+  "Accessibility is about removing barriers, not adding them.",
+  "Inclusive design leads to better products and happier users.",
+  "Accessibility compliance is just the minimum - aim higher.",
+  "Every accessibility improvement benefits all users.",
+  "Accessibility is about empathy and understanding.",
+  "Inclusive design is good design.",
+  "Accessibility should be built in, not bolted on.",
+  "The cost of accessibility is far less than the cost of exclusion.",
+  "Accessibility is not a checklist, it's a mindset.",
+  "Inclusive design creates competitive advantages.",
+  "Accessibility is about creating equal opportunities.",
+  "Every user has unique needs - accessibility addresses them all.",
+  "Accessibility improves SEO and user experience.",
+  "Inclusive design is the future of digital products.",
+  "Accessibility is about dignity and respect.",
+  "The best products work for everyone, everywhere."
+];
+
+// For testing purposes, all days are currently unlocked
+// In production, this would check the current date
+const isDayUnlocked = (day: number) => {
+  return true; // All unlocked for testing
+};
 ---
 
-<Layout title="25 Days of A11y">
-  <h1>25 Days of A11y</h1>
-  <p>Learning accessibility one day at a time</p>
+<Layout title="25 Days of A11y - Accessibility Advent Calendar">
+  <header class="hero">
+    <h1>🎄 25 Days of A11y 🎄</h1>
+    <p class="subtitle">An Accessibility Advent Calendar</p>
+    <p class="description">Discover why accessibility matters for everyone, one day at a time</p>
+  </header>
   
-  <section>
-    <h2>About This Project</h2>
+  <section class="calendar-intro">
+    <h2>About This Calendar</h2>
     <p>
-      This is a 25-day journey to learn and practice web accessibility (a11y). 
-      Each day, we'll explore different aspects of making the web more accessible 
-      to everyone, including people with disabilities.
+      Each day reveals a powerful quote about why accessibility is essential for everyone. 
+      These insights help us understand why companies should make their digital services 
+      accessible to all users, regardless of their abilities or circumstances.
     </p>
   </section>
   
-  <section>
-    <h2>Getting Started</h2>
-    <p>Follow along as we build accessible web experiences together!</p>
+  <section class="advent-calendar" aria-labelledby="calendar-heading">
+    <h2 id="calendar-heading">Accessibility Advent Calendar</h2>
+    <div class="calendar-grid" role="grid" aria-label="25 days of accessibility quotes">
+      {accessibilityQuotes.map((quote, index) => {
+        const dayNumber = index + 1;
+        const isUnlocked = isDayUnlocked(dayNumber);
+        const quotePreview = quote.length > 50 ? quote.substring(0, 50) + '...' : quote;
+        
+        return (
+          <div 
+            class={`calendar-day ${isUnlocked ? 'unlocked' : 'locked'}`}
+            role="gridcell"
+            tabindex={isUnlocked ? 0 : -1}
+            aria-label={`Day ${dayNumber}: ${isUnlocked ? quotePreview : 'Locked'}`}
+          >
+            <div class="day-number">{dayNumber}</div>
+            <div class="day-content">
+              {isUnlocked ? (
+                <a href={`/day-${dayNumber}`} class="day-link" aria-label={`Read accessibility quote for day ${dayNumber}`}>
+                  <p class="quote-preview">{quotePreview}</p>
+                  <span class="read-more">Read More →</span>
+                </a>
+              ) : (
+                <div class="locked-content">
+                  <p class="locked-text">🔒</p>
+                  <p class="locked-date">Dec {dayNumber}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+  
+  <section class="footer-info">
     <p><strong>🎉 Site is now live!</strong> This site is automatically deployed via GitHub Actions.</p>
-    <a href="/day-1" class="cta-button">Start Day 1</a>
+    <p>All days are currently unlocked for testing purposes.</p>
   </section>
 </Layout>
 
 <style>
+  .hero {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .hero {
+      background: linear-gradient(135deg, #1a3d1a 0%, #0f2a3d 100%);
+    }
+  }
+  
+  .hero::before {
+    content: '❄️';
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-size: 2rem;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+  
+  .hero::after {
+    content: '✨';
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 2rem;
+    animation: sparkle 2s ease-in-out infinite 1s;
+  }
+  
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  
   h1 {
-    color: #2c3e50;
+    color: #c41e3a;
+    margin-bottom: 0.5rem;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    h1 {
+      color: #ff6b6b;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+  }
+  
+  .subtitle {
+    color: #2d5016;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
   }
   
-  section {
-    margin: 2rem 0;
+  @media (prefers-color-scheme: dark) {
+    .subtitle {
+      color: #90ee90;
+    }
   }
   
-  .cta-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: background-color 0.15s ease-in-out;
+  .description {
+    color: #555;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
   
-  .cta-button:hover {
-    background-color: #0056b3;
+  @media (prefers-color-scheme: dark) {
+    .description {
+      color: #ccc;
+    }
   }
   
-  .cta-button:focus {
-    outline: 2px solid #007bff;
+  .calendar-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .calendar-intro h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .calendar-intro h2 {
+      color: #e9ecef;
+    }
+  }
+  
+  .advent-calendar {
+    margin: 3rem 0;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .calendar-day {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border: 3px solid #28a745;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .calendar-day {
+      background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+      border-color: #4caf50;
+    }
+  }
+  
+  .calendar-day:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .calendar-day:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  }
+  
+  .calendar-day:focus {
+    outline: 3px solid #007bff;
     outline-offset: 2px;
+  }
+  
+  .calendar-day.locked {
+    background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: #6c757d;
+    opacity: 0.7;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .calendar-day.locked {
+      background: linear-gradient(145deg, #1a1a1a 0%, #0d1117 100%);
+      border-color: #495057;
+    }
+  }
+  
+  .day-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #dc3545, #c41e3a);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .day-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .day-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .quote-preview {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .quote-preview {
+      color: #e9ecef;
+    }
+  }
+  
+  .read-more {
+    color: #007bff;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .read-more {
+      color: #66b3ff;
+    }
+  }
+  
+  .locked-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .locked-text {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .locked-date {
+    color: #6c757d;
+    font-weight: 600;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .locked-date {
+      color: #adb5bd;
+    }
+  }
+  
+  .footer-info {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 1rem;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .footer-info {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    }
+  }
+  
+  .footer-info p {
+    margin: 0.5rem 0;
+    color: #555;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .footer-info p {
+      color: #ccc;
+    }
   }
 </style>

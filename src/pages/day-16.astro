@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 16;
+const quote = "Accessibility should be built in, not bolted on.";
+const explanation = "Accessibility works best when it's integrated into the design and development process from the beginning, not added as an afterthought. Building accessibility in from the start leads to better solutions and lower costs.";
+const businessImpact = "Building accessibility in from the start reduces development costs, creates better user experiences, and avoids the need for expensive retrofits. This approach also leads to more innovative solutions and better overall product quality.";
+const actionItems = [
+  "Include accessibility requirements in your initial project specifications",
+  "Train your development team to build accessibility in from the start",
+  "Establish accessibility checkpoints throughout your development process",
+  "Avoid treating accessibility as a separate phase or afterthought"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

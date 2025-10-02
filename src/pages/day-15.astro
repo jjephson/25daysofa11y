@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 15;
+const quote = "Inclusive design is good design.";
+const explanation = "The best designs are inherently inclusive - they work well for everyone without needing special accommodations. When design is truly good, it naturally includes accessibility principles and creates better experiences for all users.";
+const businessImpact = "Good design that's inherently inclusive leads to products that are easier to use, require less support, and create stronger customer relationships. This approach often results in more elegant, efficient solutions that perform better in the market.";
+const actionItems = [
+  "Integrate accessibility principles into your design system from the beginning",
+  "Train designers to think inclusively from the start of every project",
+  "Make inclusive design a core part of your design review process",
+  "Recognize and reward good design that's naturally inclusive"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

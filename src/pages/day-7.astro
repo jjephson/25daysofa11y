@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 7;
+const quote = "Accessibility drives innovation and improves usability for everyone.";
+const explanation = "When we design for accessibility constraints, we often discover creative solutions that improve the experience for all users. Accessibility challenges push us to think differently about problems, leading to breakthrough innovations.";
+const businessImpact = "Companies that embrace accessibility constraints as innovation opportunities often develop market-leading products. This approach leads to better user experience, reduced support costs, and products that work in more contexts and environments.";
+const actionItems = [
+  "Use accessibility constraints as creative challenges in your design process",
+  "Document how accessibility solutions have improved usability for all users",
+  "Share accessibility-driven innovations with your team and stakeholders",
+  "Look for opportunities to turn accessibility requirements into competitive advantages"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

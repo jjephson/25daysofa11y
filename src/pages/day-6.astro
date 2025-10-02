@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 6;
+const quote = "Every user deserves equal access to information and functionality.";
+const explanation = "Equal access means that every user, regardless of their abilities, should be able to access the same information and perform the same functions on your website or application. This principle ensures that your digital services don't discriminate against any user group.";
+const businessImpact = "Providing equal access helps you comply with legal requirements, reach a broader audience, and build a reputation as an inclusive company. It also reduces the risk of discrimination lawsuits and opens up new market opportunities.";
+const actionItems = [
+  "Audit your website to identify any functionality that's only available to certain users",
+  "Ensure all interactive elements are accessible via keyboard navigation",
+  "Provide alternative ways to access information (text alternatives for images, captions for videos)",
+  "Test your site with assistive technologies to verify equal access"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

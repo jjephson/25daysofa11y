@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 2;
+const quote = "The web was designed to work for all people, regardless of their hardware, software, language, culture, location, or physical or mental ability.";
+const explanation = "Tim Berners-Lee's vision for the web was inherently inclusive. The web's foundation was built on principles of universality and accessibility. When we ignore accessibility, we're working against the very nature of what makes the web powerful - its ability to connect everyone, everywhere.";
+const businessImpact = "Embracing the web's universal nature means your products reach global markets, work across all devices, and serve diverse user bases. This universal approach leads to better user experience, reduced support costs, and increased market penetration.";
+const actionItems = [
+  "Test your website on different devices, browsers, and assistive technologies",
+  "Implement responsive design that works for users with different screen sizes and input methods",
+  "Consider users with varying technical skills and internet connectivity",
+  "Design for users from different cultural backgrounds and languages"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>

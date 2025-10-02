@@ -1,0 +1,22 @@
+---
+import QuotePage from '../components/QuotePage.astro';
+
+const day = 4;
+const quote = "Inclusive design creates better experiences for all users.";
+const explanation = "Inclusive design goes beyond accessibility compliance to create experiences that are genuinely welcoming and usable for everyone. When we consider the full spectrum of human diversity in our design process, we create products that are more innovative, usable, and successful.";
+const businessImpact = "Inclusive design drives innovation and opens new markets. Products designed inclusively often become market leaders because they work better for everyone. This approach also reduces the risk of alienating potential customers and creates positive brand associations.";
+const actionItems = [
+  "Include diverse perspectives in your design and development teams",
+  "Use inclusive design frameworks and methodologies in your product development",
+  "Test your products with users from different backgrounds and abilities",
+  "Create inclusive design guidelines for your team to follow"
+];
+---
+
+<QuotePage 
+  {day}
+  {quote}
+  {explanation}
+  {businessImpact}
+  {actionItems}
+/>
