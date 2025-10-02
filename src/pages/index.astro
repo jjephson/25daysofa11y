@@ -81,7 +81,6 @@ const isDayUnlocked = (day: number) => day <= openDay;
                 {!isUnlocked && (
                 <div class="locked-content">
                     <div class="locked-text">🔒</div>
-                    <div class="locked-date">Dec {dayNumber}</div>
                 </div>
               )}
               </div>
@@ -142,15 +141,6 @@ const isDayUnlocked = (day: number) => day <= openDay;
     }
   }
   
-  .hero::before {
-    content: '❄️';
-    position: absolute;
-    top: 1rem;
-    left: 2rem;
-    font-size: 2rem;
-    animation: sparkle 2s ease-in-out infinite;
-    z-index: 1;
-  }
   
   .hero .sparkle-right {
     content: '✨';
@@ -158,13 +148,7 @@ const isDayUnlocked = (day: number) => day <= openDay;
     top: 1rem;
     right: 2rem;
     font-size: 2rem;
-    animation: sparkle 2s ease-in-out infinite 1s;
     z-index: 1;
-  }
-  
-  @keyframes sparkle {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
   }
   
   h1 {
@@ -284,11 +268,11 @@ const isDayUnlocked = (day: number) => day <= openDay;
     }
   }
   
+  
   .diamond-card {
     width: 200px;
     height: 200px;
     position: relative;
-    margin: 2rem auto;
     transition: all 0.3s ease;
   }
   
@@ -300,22 +284,14 @@ const isDayUnlocked = (day: number) => day <= openDay;
     }
   }
   
-  @media (max-width: 480px) {
-    .diamond-card {
-      width: 120px;
-      height: 120px;
-      margin: 0.5rem auto;
-    }
-  }
-  
   .diamond-card:hover {
-    transform: scale(1.05);
-    z-index: 10;
+    /* transform: scale(1.05);
+    z-index: 10; */
   }
   
   .diamond-card:focus {
     outline: 3px solid #007bff;
-    outline-offset: 2px;
+    /* outline-offset: 2px; */
   }
   
   .card-border {
@@ -361,10 +337,35 @@ const isDayUnlocked = (day: number) => day <= openDay;
     }
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 480px) and (min-width: 421px) {
+    .diamond-card {
+      width: 120px;
+      height: 120px;
+      margin: 0.5rem auto;
+    }
+    
     .card-content {
       width: 80px;
       height: 80px;
+    }
+  }
+  
+  @media (max-width: 420px) {
+    .calendar-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+    
+    .diamond-card {
+      width: 280px;
+      height: 280px;
+      margin: 1rem auto;
+    }
+    
+    .card-content {
+      width: 200px;
+      height: 200px;
     }
   }
   
@@ -400,13 +401,13 @@ const isDayUnlocked = (day: number) => day <= openDay;
   
   .large-number {
     position: relative;
-    margin: 8px 0;
-  }
+    }
   
   .number-text {
     font-family: 'Times New Roman', serif;
-    font-size: 32px;
+    font-size: 70px;
     font-weight: bold;
+    line-height: normal;
     color: white;
     text-shadow: 2px 2px 0px;
     position: relative;
@@ -450,8 +451,7 @@ const isDayUnlocked = (day: number) => day <= openDay;
   
   .sub-phrase {
     font-family: 'Times New Roman', serif;
-    font-size: 8px;
-    font-weight: 400;
+    font-size: 12px;
     margin-top: 8px;
     line-height: 1.2;
   }
@@ -524,17 +524,12 @@ const isDayUnlocked = (day: number) => day <= openDay;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.3);
+    z-index: 10;
   }
   
   .locked-text {
-    font-size: 24px;
+    font-size: 30px;
     margin-bottom: 4px;
-  }
-  
-  .locked-date {
-    font-size: 8px;
-    font-weight: 600;
-    color: white;
   }
   
   .decorative-elements {
@@ -587,10 +582,10 @@ const isDayUnlocked = (day: number) => day <= openDay;
   }
   
   .diamond-card .corner-flourish {
-    color: #7f1d1d;
+    color: #86efac;
   }
   .diamond-card.active .corner-flourish {
-    color: #b45309;
+    color: #86efac;
   }
   
   .side-dots {
@@ -664,10 +659,10 @@ const isDayUnlocked = (day: number) => day <= openDay;
   }
   
   .diamond-card .side-dots {
-    color: #7f1d1d;
+    color: #86efac;
   }
   .diamond-card.active .side-dots {
-    color: #b45309;
+    color: #86efac;
   }
   
 </style>
