@@ -30,11 +30,15 @@ const accessibilityQuotes = [
   { word: "Perfect", quote: "The best products work for everyone, everywhere." }
 ];
 
-// For testing purposes, all days are currently unlocked
-// In production, this would check the current date
-const isDayUnlocked = (day: number) => {
-  return true; // All unlocked for testing
+// Determine how many days are open based on today's date in October
+const getOpenDay = () => {
+  const now = new Date();
+  const isOctober = now.getMonth() === 9; // 0-indexed months; 9 = October
+  if (!isOctober) return 0;
+  return Math.min(now.getDate(), 25);
 };
+const openDay = getOpenDay();
+const isDayUnlocked = (day: number) => day <= openDay;
 ---
 
 <Layout title="25 Days of A11y - Accessibility Advent Calendar">
@@ -44,29 +48,19 @@ const isDayUnlocked = (day: number) => {
     <p class="subtitle">An Accessibility Advent Calendar</p>
     <p class="description">Discover why accessibility matters for everyone, one day at a time</p>
   </header>
-  
-  <section class="calendar-intro">
-    <h2>About This Calendar</h2>
-    <p>
-      Each day reveals a powerful quote about why accessibility is essential for everyone. 
-      These insights help us understand why companies should make their digital services 
-      accessible to all users, regardless of their abilities or circumstances.
-    </p>
-  </section>
-  
   <section class="advent-calendar" aria-labelledby="calendar-heading">
-    <h2 id="calendar-heading">Accessibility Advent Calendar</h2>
-    <div class="calendar-grid" role="grid" aria-label="25 days of accessibility quotes">
+    <div class="calendar-grid" role="list" aria-label="25 days of accessibility quotes">
       {accessibilityQuotes.map((item, index) => {
         const dayNumber = index + 1;
         const isUnlocked = isDayUnlocked(dayNumber);
         const quotePreview = item.quote.length > 50 ? item.quote.substring(0, 50) + '...' : item.quote;
-        const cardColor = ['red', 'green', 'yellow', 'blue'][index % 4];
+        // All cards are red; add 'active' class for open days
+        const isActive = isUnlocked;
         
         return (
           <div 
-            class={`calendar-day diamond-card ${cardColor} ${isUnlocked ? 'unlocked' : 'locked'}`}
-            role="gridcell"
+            class={`calendar-day diamond-card red ${isActive ? 'active' : 'locked'}`}
+            role="listitem"
             tabindex={isUnlocked ? 0 : -1}
             aria-label={`Day ${dayNumber}: ${isUnlocked ? quotePreview : 'Locked'}`}
           >
@@ -79,17 +73,17 @@ const isDayUnlocked = (day: number) => {
                 </div>
                 <div class="sub-phrase">When Accessibility Matters</div>
                 {isUnlocked && (
-                  <a href={`/day-${dayNumber}`} class="day-link" aria-label={`Read accessibility quote for day ${dayNumber}`}>
+                <a href={`/day-${dayNumber}`} class="day-link" aria-label={`Read accessibility quote for day ${dayNumber}`}>
                     <div class="quote-preview">{quotePreview}</div>
-                    <span class="read-more">Read More →</span>
-                  </a>
+                  <span class="read-more">Read More →</span>
+                </a>
                 )}
                 {!isUnlocked && (
-                  <div class="locked-content">
+                <div class="locked-content">
                     <div class="locked-text">🔒</div>
                     <div class="locked-date">Dec {dayNumber}</div>
-                  </div>
-                )}
+                </div>
+              )}
               </div>
               <div class="decorative-elements">
                 <div class="corner-flourish top-left"></div>
@@ -107,50 +101,44 @@ const isDayUnlocked = (day: number) => {
       })}
     </div>
   </section>
-  
-  <section class="footer-info">
-    <p><strong>🎉 Site is now live!</strong> This site is automatically deployed via GitHub Actions.</p>
-    <p>All days are currently unlocked for testing purposes.</p>
-  </section>
 </Layout>
 
 <style>
+  body {
+    background-color: #16a34a;
+    min-height: 100vh;
+  }
+  
   .hero {
     text-align: center;
     padding: 3rem 0;
-    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+    background: linear-gradient(135deg, #dc2626 0%, #16a34a 50%, #dc2626 100%);
     border-radius: 1rem;
     margin-bottom: 3rem;
     position: relative;
     overflow: hidden;
-    border: 1px solid transparent;
-    background-clip: padding-box;
+    border: 3px solid #fbbf24;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   }
   
-  .hero::after {
+  .hero::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 1rem;
-    padding: 1px;
-    background: linear-gradient(135deg, #dc3545, #fd7e14, #ffc107, #28a745);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    z-index: -1;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
   }
   
   @media (prefers-color-scheme: dark) {
     .hero {
-      background: linear-gradient(135deg, #1a3d1a 0%, #0f2a3d 100%);
-    }
-    
-    .hero::after {
-      background: linear-gradient(135deg, #ff6b6b, #ffa726, #66bb6a, #42a5f5);
+      background: linear-gradient(135deg, #b91c1c 0%, #15803d 50%, #b91c1c 100%);
+      border-color: #f59e0b;
     }
   }
   
@@ -180,59 +168,91 @@ const isDayUnlocked = (day: number) => {
   }
   
   h1 {
-    color: #c41e3a;
+    color: white;
     margin-bottom: 0.5rem;
     font-size: 3rem;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
   }
   
   @media (prefers-color-scheme: dark) {
     h1 {
-      color: #ff6b6b;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      color: #fef3c7;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
     }
   }
   
   .subtitle {
-    color: #2d5016;
+    color: #fef3c7;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+  }
+  
+  @media (max-width: 768px) {
+    .subtitle {
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .subtitle {
+      font-size: 1rem;
+    }
   }
   
   @media (prefers-color-scheme: dark) {
     .subtitle {
-      color: #90ee90;
+      color: #fbbf24;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     }
   }
   
   .description {
-    color: #555;
+    color: white;
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+  }
+  
+  @media (max-width: 768px) {
+    .description {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .description {
+      font-size: 0.9rem;
+      padding: 0 0.5rem;
+    }
   }
   
   @media (prefers-color-scheme: dark) {
     .description {
-      color: #ccc;
-    }
-  }
-  
-  .calendar-intro {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
-  .calendar-intro h2 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .calendar-intro h2 {
-      color: #e9ecef;
+      color: #f3f4f6;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     }
   }
   
@@ -248,12 +268,44 @@ const isDayUnlocked = (day: number) => {
     padding: 2rem;
   }
   
+  @media (max-width: 768px) {
+    .calendar-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calendar-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      padding: 0.5rem;
+    }
+  }
+  
   .diamond-card {
     width: 200px;
     height: 200px;
     position: relative;
     margin: 2rem auto;
     transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .diamond-card {
+      width: 150px;
+      height: 150px;
+      margin: 1rem auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .diamond-card {
+      width: 120px;
+      height: 120px;
+      margin: 0.5rem auto;
+    }
   }
   
   .diamond-card:hover {
@@ -275,25 +327,17 @@ const isDayUnlocked = (day: number) => {
     overflow: hidden;
   }
   
-  /* Color schemes for each card type */
+  /* Base red card */
   .diamond-card.red .card-border {
     background: #dc2626;
-    border-color: #b91c1c;
+    border-color: #991b1b;
   }
   
-  .diamond-card.green .card-border {
-    background: #16a34a;
-    border-color: #15803d;
-  }
-  
-  .diamond-card.yellow .card-border {
-    background: #eab308;
-    border-color: #ca8a04;
-  }
-  
-  .diamond-card.blue .card-border {
-    background: #0ea5e9;
-    border-color: #0284c7;
+  /* Active/open day variant */
+  .diamond-card.active .card-border {
+    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 60%, #f87171 100%);
+    border-color: #f59e0b;
+    box-shadow: 0 12px 24px rgba(220, 38, 38, 0.35);
   }
   
   .card-content {
@@ -310,6 +354,20 @@ const isDayUnlocked = (day: number) => {
     align-items: center;
   }
   
+  @media (max-width: 768px) {
+    .card-content {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-content {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
   .descriptive-word {
     font-family: 'Times New Roman', serif;
     font-size: 12px;
@@ -319,20 +377,25 @@ const isDayUnlocked = (day: number) => {
     text-transform: uppercase;
   }
   
-  .diamond-card.red .descriptive-word {
-    color: #7f1d1d;
+  @media (max-width: 768px) {
+    .descriptive-word {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
   }
   
-  .diamond-card.green .descriptive-word {
-    color: #14532d;
+  @media (max-width: 480px) {
+    .descriptive-word {
+      font-size: 8px;
+      margin-bottom: 4px;
+    }
   }
   
-  .diamond-card.yellow .descriptive-word {
-    color: #713f12;
+  .diamond-card .descriptive-word {
+    color: white;
   }
-  
-  .diamond-card.blue .descriptive-word {
-    color: #0c4a6e;
+  .diamond-card.active .descriptive-word {
+    color: white;
   }
   
   .large-number {
@@ -350,20 +413,23 @@ const isDayUnlocked = (day: number) => {
     z-index: 2;
   }
   
-  .diamond-card.red .number-text {
+  @media (max-width: 768px) {
+    .number-text {
+      font-size: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .number-text {
+      font-size: 18px;
+    }
+  }
+  
+  .diamond-card .number-text {
     text-shadow: 2px 2px 0px #7f1d1d;
   }
-  
-  .diamond-card.green .number-text {
-    text-shadow: 2px 2px 0px #14532d;
-  }
-  
-  .diamond-card.yellow .number-text {
-    text-shadow: 2px 2px 0px #713f12;
-  }
-  
-  .diamond-card.blue .number-text {
-    text-shadow: 2px 2px 0px #0c4a6e;
+  .diamond-card.active .number-text {
+    text-shadow: 2px 2px 0px #b45309; /* golden outline */
   }
   
   .number-pattern {
@@ -390,20 +456,25 @@ const isDayUnlocked = (day: number) => {
     line-height: 1.2;
   }
   
-  .diamond-card.red .sub-phrase {
-    color: #7f1d1d;
+  @media (max-width: 768px) {
+    .sub-phrase {
+      font-size: 7px;
+      margin-top: 6px;
+    }
   }
   
-  .diamond-card.green .sub-phrase {
-    color: #14532d;
+  @media (max-width: 480px) {
+    .sub-phrase {
+      font-size: 6px;
+      margin-top: 4px;
+    }
   }
   
-  .diamond-card.yellow .sub-phrase {
-    color: #713f12;
+  .diamond-card .sub-phrase {
+    color: white;
   }
-  
-  .diamond-card.blue .sub-phrase {
-    color: #0c4a6e;
+  .diamond-card.active .sub-phrase {
+    color: white;
   }
   
   .day-link {
@@ -427,7 +498,7 @@ const isDayUnlocked = (day: number) => {
     opacity: 1;
   }
   
-  .quote-preview {
+    .quote-preview {
     font-size: 10px;
     line-height: 1.3;
     margin-bottom: 8px;
@@ -515,20 +586,11 @@ const isDayUnlocked = (day: number) => {
     right: 8px;
   }
   
-  .diamond-card.red .corner-flourish {
+  .diamond-card .corner-flourish {
     color: #7f1d1d;
   }
-  
-  .diamond-card.green .corner-flourish {
-    color: #14532d;
-  }
-  
-  .diamond-card.yellow .corner-flourish {
-    color: #713f12;
-  }
-  
-  .diamond-card.blue .corner-flourish {
-    color: #0c4a6e;
+  .diamond-card.active .corner-flourish {
+    color: #b45309;
   }
   
   .side-dots {
@@ -601,68 +663,11 @@ const isDayUnlocked = (day: number) => {
     left: 8px;
   }
   
-  .diamond-card.red .side-dots {
+  .diamond-card .side-dots {
     color: #7f1d1d;
   }
-  
-  .diamond-card.green .side-dots {
-    color: #14532d;
+  .diamond-card.active .side-dots {
+    color: #b45309;
   }
   
-  .diamond-card.yellow .side-dots {
-    color: #713f12;
-  }
-  
-  .diamond-card.blue .side-dots {
-    color: #0c4a6e;
-  }
-  
-  .footer-info {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
-    border-radius: 1rem;
-    border: 1px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-  }
-  
-  .footer-info::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 1rem;
-    padding: 1px;
-    background: linear-gradient(135deg, #6c757d, #495057, #343a40, #212529);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    z-index: -1;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .footer-info {
-      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-    }
-    
-    .footer-info::before {
-      background: linear-gradient(135deg, #adb5bd, #6c757d, #495057, #343a40);
-    }
-  }
-  
-  .footer-info p {
-    margin: 0.5rem 0;
-    color: #555;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .footer-info p {
-      color: #ccc;
-    }
-  }
 </style>
